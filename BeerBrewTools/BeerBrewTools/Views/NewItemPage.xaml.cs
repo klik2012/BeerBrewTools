@@ -30,7 +30,7 @@ namespace BeerBrewTools.Views
             // Kontrola da so izpolnjeni vsi podatki
             if ((string.IsNullOrEmpty(note.BeerType)) || (note.FinalGravity <= 0) || (note.OrigGravity <= 0))
             {
-                Application.Current.MainPage.DisplayAlert("Alert", "All fields needs to be fulfilled, or be greater than 0.0!", "Try Again");
+                await Application.Current.MainPage.DisplayAlert("Alert", "All fields needs to be fulfilled, or be greater than 0.0!", "Try Again");
                 //  throw new Exception("test");
                 await Navigation.PopAsync();
             }
