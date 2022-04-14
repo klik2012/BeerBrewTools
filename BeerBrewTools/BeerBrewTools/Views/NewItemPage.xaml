@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BeerBrewTools.Views.NewItemPage"
+             xmlns:local="clr-namespace:BeerBrewTools.ViewModels"
+             Title="Log Entry">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="5, 20, 5, 0" />
+            <On Platform="Android, UWP" Value="5, 0, 5, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DoubleToStringConverter x:Key="stringConverter" />
+            <local:DoubleRoundingConverter x:Key="roundConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <!-- Tukaj je problem (BindingContext="{staticResurce model}"). Če dam brez tega logira vnose, ne pa rezultate... in ne dela izračuna-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 0 -->
+        <Label Text="Beer Type:" Grid.Row="0" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <Editor Text="{Binding BeerType}" Grid.Row="0" Grid.Column="1" Placeholder="Enter your Beer"/>
+        <!-- Row 1 -->
+        <Label Text="Original Gravity (OG):" Grid.Row="1" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <Entry TextChanged="Entry_TextChanged" Grid.Row="1" Grid.Column="1" Keyboard="Numeric" Placeholder="1.xxx" Text="{Binding OrigGravity, &#xA;   Converter={StaticResource stringConverter}}" />
+        <!-- Row 2 -->
+        <Label Text="Final Gravity (FG):" Grid.Row="2" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <Entry TextChanged="Entry_TextChanged" Grid.Row="2" Grid.Column="1" Keyboard="Numeric" Placeholder="1.xxx" Text="{Binding FinalGravity,&#xA;   Converter={StaticResource stringConverter}}" />
+
+        <!-- Row 3 -->
+        <Label Text="Alcohol By Volume:" Grid.Row="3" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <ContentView BackgroundColor="#40808080" Grid.Row="3" Grid.Column="1" Padding="10, 10, 1, 10">
+            <Label x:Name="AlcByVol" Text="{Binding AlcByVol, &#xA;                              StringFormat='{0:N}%'}" Font="Large" HorizontalTextAlignment="Start" />
+        </ContentView>
+        <!-- Row 4 -->
+        <Label Text="Calories:" Grid.Row="4" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <ContentView BackgroundColor="#40808080" Grid.Row="4" Grid.Column="1" Padding="10, 10, 1, 10">
+            <Label Text="{Binding Calories,&#xA;                            StringFormat='{0:N} per 330ml Bottle'}" Font="Large" HorizontalTextAlignment="Start" />
+        </ContentView>
+
+     </Grid>
+
+</ContentPage>

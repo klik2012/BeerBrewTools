@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:BeerBrewTools.ViewModels"
+             x:Class="BeerBrewTools.Views.BottlingCalcPage">
+
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="5, 20, 5, 0" />
+            <On Platform="Android, UWP" Value="5, 0, 5, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BottlingViewModel x:Key="model"/>
+            <local:DoubleToStringConverter x:Key="stringConverter" />
+            <local:DoubleRoundingConverter x:Key="roundConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid BindingContext="{StaticResource model}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- Row 0 -->
+        <Label Text="Liters to package:" Grid.Row="0" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <Entry Grid.Row="0" Grid.Column="1" Keyboard="Numeric" Placeholder="" Text="{Binding LitersToPackage,&#xA;                          Converter={StaticResource stringConverter}}" />
+
+        <Label Text="Mililiters to package:" Grid.Row="1" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <ContentView BackgroundColor="#40808080" Grid.Row="1" Grid.Column="1" Padding="10, 10, 40, 10">
+            <Label Text="{Binding MlToPackage, &#xA;}" Font="Large" HorizontalTextAlignment="End" />
+        </ContentView>
+
+        <Label Text="Bottles:" Grid.Row="4" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <Label Text="330 ml" Grid.Row="5" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <Label Text="500 ml" Grid.Row="6" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <Label Text="650 ml" Grid.Row="7" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+
+        <Label Text="QTY:" Grid.Row="4" Grid.Column="1" Font="Large" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+        <Entry Grid.Row="5" Grid.Column="1" Keyboard="Numeric" Placeholder="" Text="{Binding Qty330, &#xA;                           Converter={StaticResource stringConverter}}" />
+        <Entry Grid.Row="6" Grid.Column="1" Keyboard="Numeric" Placeholder="" Text="{Binding Qty500, &#xA;                           Converter={StaticResource stringConverter}}" />
+        <Entry Grid.Row="7" Grid.Column="1" Keyboard="Numeric" Placeholder="" Text="{Binding Qty650, &#xA;                           Converter={StaticResource stringConverter}}" />
+
+        <Label Text="Total:" Grid.Row="4" Grid.Column="2" Font="Large" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+        <ContentView BackgroundColor="#40808080" Grid.Row="5" Grid.Column="2" Padding="10, 10, 40, 10">
+            <Label Text="{Binding Total330, &#xA;}" Font="Large" HorizontalTextAlignment="End" />
+        </ContentView>
+        <ContentView BackgroundColor="#40808080" Grid.Row="6" Grid.Column="2" Padding="10, 10, 40, 10">
+            <Label Text="{Binding Total500, &#xA;}" Font="Large" HorizontalTextAlignment="End" />
+        </ContentView>
+        <ContentView BackgroundColor="#40808080" Grid.Row="7" Grid.Column="2" Padding="10, 10, 40, 10">
+            <Label Text="{Binding Total650, &#xA;}" Font="Large" HorizontalTextAlignment="End" />
+        </ContentView>
+
+        <Label Text="Capacity:" Grid.Row="8" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <ContentView BackgroundColor="#40808080" Grid.Row="8" Grid.Column="1" Padding="10, 10, 40, 10">
+            <Label Text="{Binding Capacity, &#xA;}" Font="Large" HorizontalTextAlignment="End" />
+        </ContentView>
+        <Label Text="Target:" Grid.Row="9" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <ContentView BackgroundColor="#40808080" Grid.Row="9" Grid.Column="1" Padding="10, 10, 40, 10">
+            <Label Text="{Binding Target, &#xA;}" Font="Large" HorizontalTextAlignment="End" />
+        </ContentView>
+        <Label Text="Difference:" Grid.Row="10" Grid.Column="0" Font="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+        <ContentView BackgroundColor="#40808080" Grid.Row="10" Grid.Column="1" Padding="10, 10, 40, 10">
+            <Label Text="{Binding Difference, &#xA;}" Font="Large" HorizontalTextAlignment="End" />
+        </ContentView>
+
+
+    </Grid>
+</ContentPage>
